@@ -8,8 +8,9 @@ $(function () {
   // elemek összegyűjtése
   let $button = $('button');
   let $checkbox = $('input[type="checkbox"]');
-  let $invalidFieldsList = $('div.alert-danger ul');
-  let $alert = $('div.alert-danger' );
+  let $invalidFieldsList = $('div.alert-dismissible ul');
+  let $alert = $('div.alert-dismissible' );
+  let $alertPassowrd = $('div.alert-password');
   let $success = $('div#successText');
   let $form = $('form');
   let $userName = $('input#username');
@@ -76,7 +77,7 @@ $(function () {
       // ha a jelszavak nem egyezenek
       if ( password !== passwordAgain ) {
         // nem egyeznek
-
+        $alertPassowrd.show();
         invalidFields.push('Jelszó');
         invalidFields.push('Jelszó mégegyszer');
 
@@ -84,6 +85,8 @@ $(function () {
         $passwordAgain.removeClass(validClass);
         $password.addClass(invalidClass);
         $password.removeClass(validClass);
+      } else {
+        $alertPassowrd.hide();
       }
     }
 
