@@ -14,6 +14,7 @@ $(function () {
   let $form = $('form');
   let $userName = $('input#username');
   let $password = $('input#password');
+  let $passwordAgain =$('input#passwordAgain');
 
   // gombnyomásra reagálás
   $button.click( function( event ) {
@@ -53,6 +54,37 @@ $(function () {
       // helyes kitöltés
       $password.addClass(validClass);
       $password.removeClass(invalidClass);
+    }
+
+    // jelszó mégegyszer
+    let passwordAgain = $passwordAgain.val();
+    if ( passwordAgain.length <= 5) {
+      // hibás kitöltés
+      invalidFields.push('Jelszó mégegyszer');
+      $passwordAgain.addClass(invalidClass);
+      $passwordAgain.removeClass(validClass);
+    } else {
+      // helyes kitöltés
+      $passwordAgain.addClass(validClass);
+      $passwordAgain.removeClass(invalidClass);
+    }
+
+    // csak akkor kell az egyenlősége vizsgálni, ha
+    // nincsenek az "invalidFields"-ben
+
+    if (!invalidFields.includes('Jelszó') && !invalidFields.includes('Jelszó mégegyszer')) {
+      // ha a jelszavak nem egyezenek
+      if ( password !== passwordAgain ) {
+        // nem egyeznek
+
+        invalidFields.push('Jelszó');
+        invalidFields.push('Jelszó mégegyszer');
+
+        $passwordAgain.addClass(invalidClass);
+        $passwordAgain.removeClass(validClass);
+        $password.addClass(invalidClass);
+        $password.removeClass(validClass);
+      }
     }
 
 
